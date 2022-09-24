@@ -1,0 +1,79 @@
+
+Perfect Numbers
+---------------
+
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Q1. Roughly how long did it take your computer to do the search? How many perfect numbers were found and what were they?
+A1. Close to 4 second.  There are 4 perfect numbbers found in this program, which are 6, 28, 496 and 8128.
+
+Q2. Record the timing results for `findPerfects` that you observed into a table.
+A2.
+
+ |  Size  | Time (secs) |
+ |  20000 |   0.984  |
+ |  40000 |   3.393  |
+ |  80000 |   12.928  |
+ |  160000 |  51.104 |
+
+
+Q3. Does it take the same amount of work to compute `isPerfect` on the number 10 as it does on the number 1000? Why or why not? Does it take the same amount of work for `findPerfects` to search the range of numbers from 1-1000 as it does to search the numbers from 1000-2000? Why or why not?
+A3.1 isPerfect(10) 和 isPerfect(1000)的计算量不一样, 由于divisorSum(n)单重for循环遍历每一个0到n区间上每一个数，因此后者是前者计算量的10倍（这里指循环次数）
+A3.2 findPerfect（1000） 和从 1000-2000计算量不一样，尽管两者在findPerfect中遍历次数都是1000，即都调用isPerfect()1000次，但对于每一个数而言其调用isPerfect函数计算量不一样，如A3.1所述，因此总计算量也不一样（double-for loop）
+
+Q4. Extrapolate from the data you gathered and make a prediction: how long will it take `findPerfects` to reach the fifth perfect number?
+A4. \approx = 51.104 * (33550336/160000)^2 \approx= 26 days
+
+Q5. Do any of the tests still pass even with this broken function? Why or why not?
+A5. 不会，因为divisorSum()错误了，那么调用它的其他函数如findPerfects（）也就检测到答案错误了，
+
+Q6. Describe the testing strategy you used for your test cases to confirm `smarterSum` is working correctly.
+A6. 首先检查特定值（边界，平方数，普通数）如1, 25， 33等是否和divisorSum一致，一致后在使用for循环对1~10000内的数进行验证，通过后认为测试通过
+
+Q7. Record your timing results for `findPerfectsSmarter` into a table.
+A7.
+
+Line 188 TIME_OPERATION findPerfectsSmarter(500000) (size =   500000) completed in    2.705 secs
+   Line 189 TIME_OPERATION findPerfectsSmarter(1000000) (size =  1000000) completed in    6.743 secs
+   Line 190 TIME_OPERATION findPerfectsSmarter(2000000) (size =  2000000) completed in   17.889 secs
+   Line 191 TIME_OPERATION findPerfectsSmarter(4000000) (size =  4000000) completed in   48.296 secs
+   |  Size  | Time (secs) |
+   |  500000 |   2.705  |
+   |  1000000 |   6.743  |
+   |  2000000 |   17.889 |
+   |  4000000 |   48.296 |
+
+Q8. Make a prediction: how long will `findPerfectsSmarter` take to reach the fifth perfect number?
+A8. \approx = 48.296 * (33550336/4000000)^1.5 \approx= 19.5 min
+
+Q9. Explain how you chose your specific test cases and why they lead you to be confident `findNthPerfectEuclid` is working correctly.
+A9. 由于目前long能容纳的梅森完全数就只有5个，那么选取第一个 第二个 第三个 第5个进行验证，即
+EXPECT_EQUAL(findNthPerfectEuclid(1), 6);
+EXPECT_EQUAL(findNthPerfectEuclid(2), 28);
+EXPECT_EQUAL(findNthPerfectEuclid(3), 496);
+EXPECT_EQUAL(findNthPerfectEuclid(5), 33550336);
+
+而提示中的测试方法是 `EXPECT(isPerfect(findNthPerfectEuclid(n)))` 即判断我们通过程序找到的这个数是不是完全数，
+实际上是在判断已经严格证明了的Euclid算法的正确性（即通过梅森素数m一定可以构造出下一个梅森完全数），
+而不是验证我们程序书写的正确性，因此还是直接判断值比较合适
+Soundex
+-------
+
+Q10. What is the Soundex code for "Angelou"? What is the code for your own surname?
+A10. Angelou: 0520400 -> 052040 -> A52040 -> A524
+
+Q11. Before writing any code, brainstorm your plan of attack and sketch how you might decompose the work into smaller tasks. Briefly describe your decomposition strategy.
+A11. 分解思路：一个函数实现一个功能，复杂的进一步分解，简单同类操方便起见可以合并。
+根据描述算法流程共5步，按上述思路分为：
+func_1:去除所有非字母字符：横线、空格、标点等 (预处理)
+func_2:根据下表编码每个字母 （生成）
+func_3:合并重复数字，替换第一个数字，删除0，保证长度为4 （修改）
+
+Q12. Think about one or more examples of a class of names that the Soundex system might not work well for. Explain what this class of names is and why the system might incorrectly group them or mis-categorize one of the names.
+A12. TODO
+
+Q13. Suppose you are a software engineer working for the U.S. government. You have been tasked with implementing a system that collects names as part of the Census survey and analyzes these names using a phonetic algorithm. Your boss suggests using Soundex and notes that the algorithm is only expected to work for ASCII-encoded strings, since supporting Unicode would require extra work and time. What would your response be and why? What representational harms might result from building a system that exclusively uses Soundex and/or ASCII?
+A13. TODO
+
+
