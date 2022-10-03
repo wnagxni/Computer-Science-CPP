@@ -1,0 +1,43 @@
+Before submitting this file, make sure that there are no more TODO
+placeholders remaining in the file (and remove this comment too).
+
+Warmup
+------
+Q1. The display of the Stack in the debugger uses the labels `top` and `bottom` to mark the two ends of the stack. How are the contents labeled when the Stack contains only one element?
+A1. `bottom/top	value	type`
+
+Q2. For which type of inputs does the function go into an infinite loop?
+A2. 原函数每次遇到负数都向队尾多添加一次负数，此时`queue`的大小加1，因此当队列里全是负数时，每一轮循环变量`i`和`size`一起增加，永远不会触发循环终止条件
+
+Q3. Show your edited code for duplicateNegatives that fixes the problem with the infinite loop
+A3. 功能实现中仅需要`Queue`初始`size`的循环次数，由于`size`变动，因此提前将原来的大小存在循环体外变量中
+
+Q4. What is the better fix to `sumStack` that corrects the bug?
+A4. 将题目中给出的空栈判断和`while`合并，在循环外定义`sum = 0`, 直接进入while循环
+
+Maze
+-------
+Q5. In lecture, Cynthia noted the convention is to pass large data structures by reference for reasons of efficiency. Why then do you think `validatePath` passes `path` by value instead of by reference?
+A5. 因为`validatePath`函数内修改了`path`，那么如果在调用完一次`validatePath`后还要使用`path`，其数据已经被更改了，而这是我们所不期望的
+
+Q6. After you have written your tests, describe your testing strategy to determine that your `validatePath` works as intended.
+A6. 对于path可能出现的不连续、越界、撞墙、起点终点错误的情况进行分别验证
+
+Search Engine
+-------------
+Q7. Sketch the contents of the inverted index built from the `res/tiny.txt` database file.
+A7. Key          Val
+milk         {"www.shoppinglist.com"}
+    fish	 {"www.shoppinglist.com", "www.dr.seuss.net", "www.bigbadwolf.com"}
+    ...		 ...
+
+Beyond Algorithmic Analysis
+---------------------------
+Q8. In a short paragraph, describe a real or plausible scenario not previously presented in lecture in which using techniques like Big-O or Asymptotic Analysis to improve the performance of an algorithm might benefit the environment. Include your thoughts on how a software engineer working on this piece of code might identify such potential benefits and take them into consideration when designing the code.
+A8. TODO
+
+Q9. According to the contract that IBM struck with the state of Indiana, the criteria for optimization were improving efficiency of the overall welfare system and reducing fraud. Criteria for reducing wait times and wrongful denials were not included.  However, wrongfully denying benefits has a huge negative  impact on the citizens who rely on the system.  If criteria like minimizing wrongful denials were not included in the contract, should engineers have included them in their optimization algorithm?  Why or why not?
+A9. TODO
+
+Q10. Imagine that after completing CS106B you are hired at IBM as an engineer working on this system. How might you have approached designing and setting the goals of this system?  How might you apply algorithmic analysis tools to build a system that achieved  the desired goals? Could you do so in a way that avoids the severe negative impacts on users of the system that are outlined in the case study?
+A10. TODO
